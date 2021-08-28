@@ -28,18 +28,19 @@ exports.CreateAccount =  (req, res) => {
                 email: email,
                 password: password,
                firstname: firstname,
-                lastname: lastname 
+                lastname: lastname,
+                userID: Math.floor(100000 + Math.random() * 90000
             })
                 new_user.save()
                 res.status(200).json({
                     message:"New user is created",
                     result: result
-                })
+               })
         }
     })
     .catch(error =>{
         res.status(400).json({
-            message:"error",
+            message:"error finding user ",
             error: error.message
         })
     })
