@@ -20,7 +20,10 @@ exports.CreateAccount =  (req, res) => {
         .then(olduser =>{
             // console.log(olduser)
             if (olduser){
-                res.status(400).json({error:"user already exists"})
+                res.status(400).json({
+                    message: "user already exists",
+                    error:"request failed with status code 400"
+                })
             } else {
                 bcrypt.genSalt(12)
                 .then(salt => {
@@ -76,7 +79,11 @@ exports.CreateAccount =  (req, res) => {
                     .catch(error => res.status(500).json({message:'error generating salt', error: error}))
                 }
         })
-        .catch(error=>res.status(400).json('error'+ error))
+        .catch(error=>res.status(400).json({
+            message:'Error With Creating Account',
+            error: error.message
+        })
+        )
 
         
 
@@ -87,7 +94,7 @@ exports.Login = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     let loadedUser
-    console.log('endpoint fired')
+    
      
     User.findOne({email: email})
     .then(user => {
