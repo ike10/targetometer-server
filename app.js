@@ -13,7 +13,7 @@ const UserRoutes = require('./app/router/user.router')
 
 
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(express.json())
 
 app.use(express.static(__dirname));
