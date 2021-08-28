@@ -22,7 +22,7 @@ app.use(express.static(__dirname));
 dotenv.config({path: './.env'})
 // app.use(morgan('combined', {stream: accessLogStream}))
 app.use(cors())
-const port = process.env.PORT
+
 // Connect Database
 db()
 app.set('trust proxy', true);
@@ -49,7 +49,7 @@ app.use('/api/v1/users/', UserRoutes)
 // app.get('/', (req, res)=>{
 //     res.send('hello world')
 // })
-
+const port = process.env.PORT || 5000
 
 app.listen(
     port,()=>{
