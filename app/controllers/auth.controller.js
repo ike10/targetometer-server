@@ -21,7 +21,7 @@ exports.CreateAccount =  (req, res) => {
         if (result){
         res.status(400).json({
             message:"User already exists",
-
+            
         })
     }else{
             const new_user = new User({
