@@ -4,8 +4,8 @@
   "description": "Targetometer application",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "NODE_ENV=production node app ",
+    "dev": "NODE_ENV=production nodemon app "
   },
   "author": "",
   "license": "ISC",
