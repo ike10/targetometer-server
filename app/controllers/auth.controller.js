@@ -11,7 +11,7 @@ exports.CreateAccount =  (req, res) => {
     
     const password = req.body.password
     const firstname = req.body.firstname
-    const lastname = req.firstname.body.lastname
+    const lastname = req.body.lastname
     const email = req.body.email
    
     const role = req.body.role
