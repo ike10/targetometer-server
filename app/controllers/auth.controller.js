@@ -29,7 +29,7 @@ exports.CreateAccount =  (req, res) => {
                 password: password,
                firstname: firstname,
                 lastname: lastname,
-                userID: Math.floor(100000 + Math.random() * 90000
+                userID: Math.floor(100000 + Math.random() * 90000)
             })
                 new_user.save()
                 res.status(200).json({
