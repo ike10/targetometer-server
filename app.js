@@ -8,8 +8,8 @@ const app = express()
 const dotenv = require('dotenv')
 
 // Routes
-const AuthRoutes = require('./app/controllers/auth.controller')
-
+const AuthRoutes = require('./app/router/auth.router')
+const UserRoutes = require('./app/router/user.router')
 
 
 
@@ -38,7 +38,7 @@ app.use((error, req, res, next) => {
 
 // app.use(morgan('combined', {stream: accessLogStream}))
 app.use('/api/v1/auth/', AuthRoutes)
-// app.use('/api/v1/users/', UserRoutes)
+app.use('/api/v1/users/', UserRoutes)
 // app.use('/api/v1/companies/', CompanyRoutes)
 // app.use('/api/v1/routes/', RouteRoutes)
 

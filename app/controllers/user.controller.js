@@ -3,8 +3,8 @@ const Image = require('../models/image.model')
 const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
-const Route = require('../models/route.model')
-const Ticket = require('../models/ticket.model')
+
+
 const Project = require('../models/project.model')
 const Task = require('../models/task.model')
 // Create A User
