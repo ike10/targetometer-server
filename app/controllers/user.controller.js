@@ -250,6 +250,10 @@ exports.CREATE_TASK = (req, res) =>{
                 .then(found_project=>{
                     found_project.tasks.push(result)
                     found_project.save()
+                    res.status(200).json({
+                        message: "Task created succesfully ",
+                        result: result
+                    }) 
                 })
                 .catch(error => {
                     res.status(400).json({
