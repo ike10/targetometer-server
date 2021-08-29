@@ -24,12 +24,15 @@ Router.delete('/:userID', isAuth, userController.DELETE_USER)
 Router.get('/:userID/projects', isAuth, userController.GET_USER_PROJECTS)
 Router.post('/:userID/projects', isAuth, userController.CREATE_PROJECT)
 Router.get('/:userID/projects/:projectID', userController.GET_SINGLE_PROJECT)
-
+Router.put('/:userID/projects/:projectID/completed', userController.UPDATE_PROJECT_TO_COMPLETED)
+Router.put('/:userID/projects/:projectID/working', userController.UPDATE_PROJECT_TO_WORKING)
 // Tasks
 Router.get('/:userID/projects/:projectID/tasks', isAuth, userController.GET_PROJECT_TASKS)
 Router.post('/:userID/projects/:projectID/tasks', isAuth, userController.CREATE_TASK)
 Router.get('/:userID/projects/:projectID/tasks/:taskID', isAuth, userController.GET_SINGLE_TASK)
 
+Router.put('/:userID/projects/:projectID/tasks/:taskID/completed', userController.UPDATE_TASK_TO_COMPLETED)
+Router.put('/:userID/projects/:projectID/tasks/:taskID/working', userController.UPDATE_TASK_TO_WORKING)
 
 
 // Task section

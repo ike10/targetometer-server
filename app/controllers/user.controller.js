@@ -162,7 +162,8 @@ exports.CREATE_PROJECT = (req, res) =>{
         description: req.body.description,
         startdate: req.body.startdate,
         enddate: req.body.enddate,
-        projectID: Math.floor(100000 + Math.random() * 90000)
+        projectID: Math.floor(100000 + Math.random() * 90000),
+        status: 'created'
     })
 
     new_project.save()
@@ -216,7 +217,7 @@ exports.GET_USER_PROJECTS = (req, res) => {
 
 // Get single project from a user
 exports.GET_SINGLE_PROJECT = (req, res) =>{
-    Project.find({projectID: req.params.projectID})
+    Project.findOne({projectID: req.params.projectID})
         .then(result => {
             res.status(200).json({
                 message:"Project found",
@@ -231,7 +232,43 @@ exports.GET_SINGLE_PROJECT = (req, res) =>{
         })
 }
 
+// update task state to working
+exports.UPDATE_PROJECT_TO_WORKING = ( req,res) =>{
+    Project.findOneAndUpdate({projectID: req.params.projectID},{status: 'working'})
+        .then(result => {
+            res.json({
+                message:'project status updated to in progress',
+                result: result
+            })
+        })
+        .catch(error => {
+            res.status(400).json({
+                message:'error updating project',
+                error: error.message
+            })
+        })
+}
 
+// update task state to completed
+exports.UPDATE_PROJECT_TO_COMPLETED = ( req,res) =>{
+    Project.findOneAndUpdate({projectID: req.params.projectID},{status: 'completed'})
+        .then(result => {
+            res.json({
+                message:'project status updated to completed',
+                result: result
+            })
+        })
+        .catch(error => {
+            res.status(400).json({
+                message:'error updating project',
+                error: error.message
+            })
+        })
+}
+
+
+
+// tasks section
 
 
 
@@ -242,19 +279,21 @@ exports.CREATE_TASK = (req, res) =>{
         description: req.body.description,
         startdate: req.body.startdate,
         enddate: req.body.enddate,
-        taskID: Math.floor(100000 + Math.random() * 90000)
+        taskID: Math.floor(100000 + Math.random() * 90000),
+        status: 'created'
     })
 
     new_task.save()
-      .then((result) =>{
-
-                Project.find({projectID: req.params.projectID})
+      .then(result =>{
+            console.log('task saved')
+                Project.findOne({projectID: req.params.projectID})
                 .then(found_project=>{
+                    console.log('project found')
                     found_project.tasks.push(result)
                     found_project.save()
                     res.status(200).json({
                         message: "Task created succesfully ",
-                        result: result
+                       result: result
                     }) 
                 })
                 .catch(error => {
@@ -266,7 +305,7 @@ exports.CREATE_TASK = (req, res) =>{
       })
       .catch(error =>{
         res.status(400).json({
-            message: "error adding task to project",
+            message: "error saving task",
             error: error.message
         })
       })
@@ -274,7 +313,7 @@ exports.CREATE_TASK = (req, res) =>{
 
 // get all tasks from a project 
 exports.GET_PROJECT_TASKS  = (req, res) => {
-    Project.find({projectID: req.params.projectID})
+    Project.findOne({projectID: req.params.projectID})
         .populate('tasks')
         .exec(function(err, project){
             if (err){
@@ -292,7 +331,7 @@ exports.GET_PROJECT_TASKS  = (req, res) => {
 
 // get a single task from a project 
 exports.GET_SINGLE_TASK = (req, res) => {
-    Task.find({taskID: req.params.taskID})
+    Task.findOne({taskID: req.params.taskID})
     .then(result => {
         res.status(200).json({
             message: "Task Found",
@@ -307,3 +346,37 @@ exports.GET_SINGLE_TASK = (req, res) => {
     })
 }
 
+
+// update task state to working
+exports.UPDATE_TASK_TO_WORKING = ( req,res) =>{
+    Task.findOneAndUpdate({taskID: req.params.taskID},{status: 'working'})
+        .then(result => {
+            res.json({
+                message:'task status updated to in progress',
+                result: result
+            })
+        })
+        .catch(error => {
+            res.status(400).json({
+                message:'error updating task',
+                error: error.message
+            })
+        })
+}
+
+// update task state to completed
+exports.UPDATE_TASK_TO_COMPLETED = ( req,res) =>{
+    Task.findOneAndUpdate({taskID: req.params.taskID},{status: 'completed'})
+        .then(result => {
+            res.json({
+                message:'task status updated to completed',
+                result: result
+            })
+        })
+        .catch(error => {
+            res.status(400).json({
+                message:'error updating task',
+                error: error.message
+            })
+        })
+}
