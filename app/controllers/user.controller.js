@@ -169,7 +169,7 @@ exports.CREATE_PROJECT = (req, res) =>{
       .then((result) =>{
           User.findById(req.user.id)
           .then(found_user=>{
-              found_user.projects.push()
+              found_user.projects.push(result)
               found_user.save()
               res.status(200).json({
                   message:"Project created successfully",
@@ -197,10 +197,12 @@ exports.GET_USER_PROJECTS = (req, res) => {
     User.findById(req.user.id)
         .populate('projects')
         .exec(function(err, user){
+            
             if (err){
                 return handleError(err)
             }
             const result = user.projects.map(project =>{
+                
                 return project
             })
             res.status(200).json({
