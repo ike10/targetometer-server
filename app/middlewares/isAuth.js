@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const {secretToken, twilio_account_sid, twilio_auth_token, twilio_number} = require('../utils/config')
+const {secretToken} = require('../utils/config')
 
 const isAuth = (req, res, next) =>{
     const authHeader = req.get('Authorization')
@@ -17,9 +17,9 @@ const isAuth = (req, res, next) =>{
         decodedToken = jwt.verify(token, secretToken)
         console.log(decodedToken)
     }catch(error){
-        res.status(500).json({
+        res.status(400).json({
             message: 'error decoding token',
-            error: error
+            error: error.message
         
         })
     }

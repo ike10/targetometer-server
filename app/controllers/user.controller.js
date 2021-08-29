@@ -171,6 +171,10 @@ exports.CREATE_PROJECT = (req, res) =>{
           .then(found_user=>{
               found_user.projects.push()
               found_user.save()
+              res.status(200).json({
+                  message:"Project created successfully",
+                  result: result
+              })
           })
           .catch(err => {
               res.status(400).json({
