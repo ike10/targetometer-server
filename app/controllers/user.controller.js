@@ -200,7 +200,7 @@ exports.GET_USER_PROJECTS = (req, res) => {
             if (err){
                 return handleError(err)
             }
-            const result = user.projects.map(ticket =>{
+            const result = user.projects.map(project =>{
                 return project
             })
             res.status(200).json({
@@ -278,7 +278,7 @@ exports.GET_PROJECT_TASKS  = (req, res) => {
             if (err){
                 return handleError(err)
             }
-            const result = project.tasks.map(route =>{
+            const result = project.tasks.map(task =>{
                 return task
             })
             res.status(200).json({
