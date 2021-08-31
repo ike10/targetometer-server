@@ -268,12 +268,12 @@ exports.ConfirmEmail = (req, res) => {
     Token.findOne({token: emailtoken})
         .then(token =>{
             // if token is not found
-            if(!token){
-                return res.status(400).send({message:'Your Verfication Link May have expired, please try again'})
-            }
+            // if(!token){
+            //     return res.status(400).send({message:'Your Verfication Link May have expired, please try again'})
+            // }
             // if token is found check for valid user
-            else{
-                
+            // else{
+               
                 User.findOne({_id: token._userId})
                     .then(user =>{
                         if(!user){
@@ -294,7 +294,7 @@ exports.ConfirmEmail = (req, res) => {
 
                     })
                     .catch(error => res.status(400).json({message:"error finding account with this token", error: error}))
-            }
+            // }
 
         })
         .catch(error => res.status(400).json({message:"error finding this token", error: error}))
