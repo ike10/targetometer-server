@@ -63,7 +63,7 @@ exports.CreateAccount =  (req, res) => {
             from: `intiencelabs@gmail.com`, // Change to your verified sender
             subject: 'Please verify your account',
             text: `Your verification code is ${tokenid}, please go to the link below and enter it`,
-            html: `<p>Your verification code is ${tokenid} link</p>`,
+            html: `<p>Your verification code is: <strong> ${tokenid} </strong> </p>`,
           }
           
           sgMail
