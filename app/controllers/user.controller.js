@@ -165,7 +165,7 @@ exports.CREATE_PROJECT = (req, res) =>{
         projectID: Math.floor(100000 + Math.random() * 90000),
         status: 'created'
     })
-    let xyz
+    
     new_project.save()
       .then((result) =>{
           User.findById(req.user.id)

@@ -41,7 +41,6 @@ const UserSchema = new Schema({
     },
     isVerified:{
         type: Boolean,
-        default: true
     },
     comments:[{
         type: mongoose.Schema.Types.ObjectId,

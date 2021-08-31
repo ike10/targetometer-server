@@ -33,9 +33,9 @@ const ProjectSchema = new Schema({
          type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
-    
+   
     status:{
-        type: String
+        type: String,
     }, 
     comments:[{
         type: mongoose.Schema.Types.ObjectId,
