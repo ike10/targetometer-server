@@ -40,7 +40,7 @@ const UserSchema = new Schema({
         ref: 'Image'
     },
     isVerified:{
-        type: Boolean,
+        type: true,
     },
     comments:[{
         type: mongoose.Schema.Types.ObjectId,
