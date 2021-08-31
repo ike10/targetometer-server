@@ -289,15 +289,15 @@ exports.ConfirmEmail = (req, res) => {
                             user.isVerified = true
                             user.save()
                                 .then(result => res.status(200).send('your account has been succesfully verified'))
-                                .catch(error => res.status(500).json({message: 'error verifying account', error: error})) 
+                                .catch(error => res.status(500).json({message: 'error verifying account', error: error.message})) 
                         }
 
                     })
-                    .catch(error => res.status(400).json({message:"error finding account with this token", error: error}))
+                    .catch(error => res.status(400).json({message:"error finding account with this token", error: error.message}))
             // }
 
         })
-        .catch(error => res.status(400).json({message:"error finding this token", error: error}))
+        .catch(error => res.status(400).json({message:"error finding this token", error: error.message}))
 }
 
 // exports.ResendVerificationLink= (req, res)=>{
