@@ -24,10 +24,6 @@ const TaskSchema = new Schema({
     enddate:{
         type:String,
     },
-    tasks:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Task'
-    }],
    
     members:[{
          type: mongoose.Schema.Types.ObjectId,

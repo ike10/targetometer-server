@@ -327,10 +327,10 @@ exports.GET_PROJECT_TASKS  = (req, res) => {
                 return handleError(err)
             }
             const result = project.tasks.map(task =>{
-                return task
+               return task
             })
             res.status(200).json({
-                message: 'Tasks found',
+                message: 'Tasks from project found',
                 result: result
             })
         })
