@@ -22,7 +22,7 @@ app.use(express.static(__dirname));
 dotenv.config({path: './.env'})
 // app.use(morgan('combined', {stream: accessLogStream}))
 app.use(cors())
-
+app.use('/api/v1/uploads', express.static('uploads'))
 // Connect Database
 db()
 app.set('trust proxy', true);
@@ -39,6 +39,7 @@ app.use((error, req, res, next) => {
 // app.use(morgan('combined', {stream: accessLogStream}))
 app.use('/api/v1/auth/', AuthRoutes)
 app.use('/api/v1/users/', UserRoutes)
+
 // app.use('/api/v1/companies/', CompanyRoutes)
 // app.use('/api/v1/routes/', RouteRoutes)
 

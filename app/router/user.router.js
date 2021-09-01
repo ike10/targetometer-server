@@ -1,8 +1,40 @@
-
+const multer = require('multer')
 const Router = require('express').Router()
 // const upload = require('../utils/multer')
 const userController = require('../controllers/user.controller')
 const isAuth = require('../middlewares/isAuth')
+
+
+const fileFilter = (req, file, cb)=>{
+    // accept a file
+ if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg'){
+     cb(null, true)
+ }else{
+     // reject a file
+     cb(null, false)
+ }
+ 
+}
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, 'uploads/')
+    },
+    filename:function(req, file, cb){
+        cb(null, new Date().toISOString() + file.originalname)
+    },
+
+})
+
+
+
+const upload = multer({storage : storage,
+     limits:{
+    fileSize: 1024 * 1024 * 5
+},
+    fileFilter: fileFilter
+})
+
 
 
 // create user
@@ -13,7 +45,19 @@ Router.get('/', isAuth, userController.GET_ALL_USERS)
 // get a single user
 Router.get('/:userID', isAuth, userController.GET_USER)
 // update user
-Router.put('/:userID', isAuth, userController.UPDATE_USER)
+Router.put('/:userID', isAuth, upload.single('profileimage'), userController.UPDATE_USER)
+
+// Upload image
+// Router.put('/:userID/profileimage', isAuth, upload.single('profileimage'), (req, res, next)=>{
+//     console.log(req.file)
+//     res.status(200).json({
+//         message: 'image uploaded'
+//     })
+// })
+
+// Router
+
+
 // delete a single user
 Router.delete('/:userID', isAuth, userController.DELETE_USER)
 // uploadimage

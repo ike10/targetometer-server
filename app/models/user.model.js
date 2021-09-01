@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   },
     password: {
         type: String,
-        required: true,
+        // required: true,
         trim: true,
     },
     username:{
@@ -36,12 +36,20 @@ const UserSchema = new Schema({
     }],
     
     profileimage:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Image'
+        type: String
     },
     isVerified:{
         type: Boolean,
         default: true
+    },
+    occupation:{
+        type: String
+    },
+    contact:{
+        type: String
+    },
+    address:{
+        type: String
     },
     comments:[{
         type: mongoose.Schema.Types.ObjectId,

@@ -45,11 +45,21 @@ exports.UPDATE_USER = (req, res, next) => {
             const password = req.body.password
             const firstname = req.body.firstname
             const lastname = req.body.lastname
+            const profileimage = req.file.path
+            const contact = req.body.contact 
+            const occupation = req.body.occupation 
+            const address = req.body.address
+
     User.findByIdAndUpdate(req.user.id,{
          firstname: firstname,
         lastname :lastname,
         password: password,
-        email:email
+        email:email,
+        profileimage: profileimage,
+        contact: contact,
+        occupation: occupation,
+        address: address
+
     }).then(()=>{
         res.status(400).json({
             message:'user updated',
@@ -86,67 +96,64 @@ exports.UPDATE_USER = (req, res, next) => {
 //     })
 // }
 
-// const upload = path =>{
-//     multer({
-//         storage: storage(path),
-//         fileFilter:(req, file,cb)=>{
-//             if(
-//                 file.mimetype === 'image/png' ||
-//                 file.mimetype === 'image/jpg' ||
-//                 file.mimetype === 'image/jpeg'
-//             ){
-//                 cb(null, true);
-//             }else{
-//                 cb(null, false)
-//                 return cb(new Error('Only .png .jpg and .jpeg format are allowed'))
-//             }
-//         },
-//     })
 
 
-// }
 
-// Upload Image
-// exports.UPDATE_USER_IMAGE = (req, res, next) =>{
 
-//     upload(req, res, function(err){
-//         if (err){
-//             res.status(400).json({
-//                 message: "error with multer",
+ 
+// var upload = multer({ storage: storage });
+
+// RECEIVE IMAGE
+// exports.GET_PROFILE_IMAGE = (req, res)=>{
+//     Image.find({}, (err, items)=>{
+//         if(err){
+//             console.log(error)
+//             res.status(500).json({
+//                 message:"An error occured while retrieving image",
 //                 error: err.message
 //             })
-//         } else {
-//             const new_image = new Image ({
+//         }else{
+//             res.status(200).json({
+//                 result: items
+//             })
+//         }
+//     })
+// }
+
+// Upload image
+// exports.UPLOAD_PROFILE_IMAGE = (req, res)=>{
+//     const new_image = new Image({
 //         name: req.body.name,
-//         description: req.body.description,
-//         image:{
+//         desc: req.body.desc,
+//         img: {
 //             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-//             contentType: req.file.mimetype,
-//             }
+//             contentType: 'image/png'
+//         }
 //     })
 
 //     new_image.save()
-//         .then((result)=>{
-//            User.findByIdAndUpdate(req.user.id,{profileimage: result})
-//             .then(()=>{
-//                 res.status(200).json({
-//                     message: "Profile Image Successfully uploaded"
-//                 })
-//             })
-//             .catch(error =>{
-//                 res.status(400).json({
-//                     message: "error uploading profile image",
-//                     error: error
-//                 })
-//             })
+//         .then(result => {
+//             User.findById(req.user.id)
+//                .then(found_user=>{
+//                    found_user.profileimage
+//                })
+//                .catch()
 //         })
-//         .catch(error => {
-//             res.status(400).json('error uploading image' + error)
-//         })
-//         }
-//     })
     
+    
+
+    // imgModel.create(obj, (err, item) => {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     else {
+    //         // item.save();
+    //         res.redirect('/');
+    //     }
+    // })
+
 // }
+
 
 // Delete a Single user
 exports.DELETE_USER = (req, res, next) => {
